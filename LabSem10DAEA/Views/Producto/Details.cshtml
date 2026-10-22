@@ -1,0 +1,41 @@
+﻿@model LabSem10DAEA.Models.ProductoModel
+
+@{
+    ViewBag.Title = "Detalles del Producto";
+}
+
+<div class="mt-4 mb-3">
+    <h2>Detalle del Producto</h2>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-info text-white">
+        <h5 class="mb-0">Información del Producto #@Model.Id</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3 text-secondary">Id / Código:</dt>
+            <dd class="col-sm-9 fw-bold">@Model.Id</dd>
+
+            <dt class="col-sm-3 text-secondary">Nombre:</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+
+            <dt class="col-sm-3 text-secondary">Descripción:</dt>
+            <dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Descripcion) ? "Sin descripción" : Model.Descripcion)</dd>
+
+            <dt class="col-sm-3 text-secondary">Precio Unitario:</dt>
+            <dd class="col-sm-9 text-success fw-bold">S/. @Model.Precio.ToString("N2")</dd>
+
+            <dt class="col-sm-3 text-secondary">Stock Disponible:</dt>
+            <dd class="col-sm-9">
+                <span class="badge @(Model.Stock > 5 ? "bg-success" : "bg-warning text-dark")">
+                    @Model.Stock unidades
+                </span>
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-transparent">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-secondary ms-2" })
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model LabSem10DAEA.Models.ProductoModel
+
+@{
+    ViewBag.Title = "Eliminar Producto";
+}
+
+<div class="mt-4 mb-3">
+    <h2>Eliminar Producto</h2>
+</div>
+
+<div class="alert alert-danger shadow-sm d-flex align-items-center" role="alert">
+    <div>
+        <h5 class="alert-heading mb-1">¿Está seguro que desea eliminar este producto?</h5>
+        <p class="mb-0">Esta acción removerá el producto de la sesión actual de manera inmediata.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-danger">
+    <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">Producto a Eliminar</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3 text-secondary">Id / Código:</dt>
+            <dd class="col-sm-9 fw-bold">@Model.Id</dd>
+
+            <dt class="col-sm-3 text-secondary">Nombre:</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+
+            <dt class="col-sm-3 text-secondary">Descripción:</dt>
+            <dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Descripcion) ? "Sin descripción" : Model.Descripcion)</dd>
+
+            <dt class="col-sm-3 text-secondary">Precio:</dt>
+            <dd class="col-sm-9 text-danger fw-bold">S/. @Model.Precio.ToString("N2")</dd>
+
+            <dt class="col-sm-3 text-secondary">Stock:</dt>
+            <dd class="col-sm-9">@Model.Stock unidades</dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-transparent">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Confirmar y Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary ms-2" })
+        }
+    </div>
+</div>
